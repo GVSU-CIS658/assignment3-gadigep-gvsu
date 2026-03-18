@@ -85,7 +85,10 @@ const syrups: Ref<SyrupType[]> = ref([
 ]);
 
 const currentTemp = ref(temps.value[1]);
+const currentBase = ref(bases.value[2]); // Coffee
+const currentCreamer = ref(creamers.value[0]); // No Creamer
+const currentSyrup = ref(syrups.value[0]); // No Syrup
 
 export type { BaseBeverageType, CreamerType, SyrupType };
 export { temps, bases, creamers, syrups };
-export { currentTemp };
+export { currentTemp, currentBase, currentCreamer, currentSyrup};
