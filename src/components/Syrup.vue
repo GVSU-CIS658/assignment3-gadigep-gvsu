@@ -1,16 +1,20 @@
 <template>
-  <div class="syrup"></div>
+  <div class="syrup-layer" :style="syrupStyle"><slot /></div>
 </template>
 
-<script setup lang="ts"></script>
-<style lang="scss" scoped>
-.syrup {
-  transform: translateY(400%);
-  background-color: #c6c6c6;
-  position: relative;
-  width: 100%;
-  height: 20%;
-  animation: pour-tea 2s 1s forwards;
-  z-index: 2;
+<script setup lang="ts">
+import { computed } from 'vue'
+const props = defineProps<{ syrup: string }>()
+
+const colors: Record<string, string> = {
+  'vanilla':  '#ffefd5',
+  'caramel':  '#c68642',
+  'hazelnut': '#7b3f00',
 }
-</style>
+const syrupStyle = computed(() => {
+  const c = colors[props.syrup]
+  return {
+    background: `repeating-linear-gradient(45deg, ${c}, ${c} 4px, transparent 4px, transparent 14px)`
+  }
+})
+</script>
