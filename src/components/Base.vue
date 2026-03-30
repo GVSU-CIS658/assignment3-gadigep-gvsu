@@ -1,17 +1,15 @@
 <template>
-  <div class="baseBeverage"></div>
+  <div class="base-layer" :style="baseStyle"><slot /></div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from 'vue'
+const props = defineProps<{ base: string }>()
 
-<style scoped>
-.baseBeverage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  bottom: 0;
-  animation: pour-tea 2s;
-  z-index: 300;
-  /* // border-radius: 0.05em 0.05em 2.2em 2.2em; */
+const configs: Record<string, string> = {
+  'coffee':    'linear-gradient(180deg,#6b3a1f,#4a2c0a)',
+  'green-tea': 'linear-gradient(180deg,#a8c97a,#5a7d3a)',
+  'black-tea': 'linear-gradient(180deg,#d4874a,#8b4513)',
 }
-</style>
+const baseStyle = computed(() => ({ background: configs[props.base] ?? configs['coffee'] }))
+</script>
