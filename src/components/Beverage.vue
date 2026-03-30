@@ -1,32 +1,35 @@
 <template>
-  <div class="mug">
-    <div class="mug-body">
-      <Base :base="base">
-        <!-- Only show syrup if a syrup is chosen -->
-        <Syrup v-if="syrup !== 'none'" :syrup="syrup">
-          <!-- Creamer sits on top of syrup, or directly on base if no syrup -->
-          <Creamer v-if="creamer !== 'none'" :creamer="creamer" />
-        </Syrup>
+  <Mug>
+    <Contents>
+      <template #bottom>
+        <Base :base="base" />
+      </template>
 
-        <!-- If no syrup but creamer chosen: creamer directly on base (no gap) -->
-        <Creamer
-          v-if="creamer !== 'none' && syrup === 'none'"
-          :creamer="creamer"
-        />
-      </Base>
-    </div>
-    <div class="mug-handle"></div>
-  </div>
+      <template v-if="showSyrup" #mid>
+        <Syrup :syrup="syrup" />
+      </template>
+
+      <template v-if="showCreamer" #top>
+        <Creamer :creamer="creamer" :has-syrup="showSyrup" />
+      </template>
+    </Contents>
+  </Mug>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import Mug from './Mug.vue'
+import Contents from './Contents.vue'
 import Base from './Base.vue'
 import Creamer from './Creamer.vue'
 import Syrup from './Syrup.vue'
 
-defineProps<{
+const props = defineProps<{
   base: string
   creamer: string
   syrup: string
 }>()
+
+const showSyrup = computed(() => props.syrup !== 'none')
+const showCreamer = computed(() => props.creamer !== 'none')
 </script>
