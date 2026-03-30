@@ -1,5 +1,5 @@
 <template>
-  <div class="syrup-layer" :style="syrupStyle"><slot /></div>
+  <div class="syrup-layer" :style="syrupStyle"></div>
 </template>
 
 <script setup lang="ts">
@@ -18,3 +18,14 @@ const syrupStyle = computed(() => {
   }
 })
 </script>
+
+<style scoped>
+.syrup-layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 55%;
+  height: 15%;
+  transition: background 220ms ease;
+}
+</style>

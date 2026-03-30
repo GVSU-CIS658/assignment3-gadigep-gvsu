@@ -1,5 +1,5 @@
 <template>
-  <div class="base-layer" :style="baseStyle"><slot /></div>
+  <div class="base-layer" :style="baseStyle"></div>
 </template>
 
 <script setup lang="ts">
@@ -13,3 +13,14 @@ const configs: Record<string, string> = {
 }
 const baseStyle = computed(() => ({ background: configs[props.base] ?? configs['coffee'] }))
 </script>
+
+<style scoped>
+.base-layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55%;
+  transition: background 220ms ease;
+}
+</style>
